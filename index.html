@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>إسماعيل بابا كافيه</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* =========================================
+           1. FOUNDATION & VARIABLES (KAHVESI THEME)
+           ========================================= */
+        :root {
+            /* Typography */
+            --font-main: 'Cairo', 'Outfit', sans-serif;
+            
+            /* Colors */
+            --brand-brown: #381A0F;      
+            --brand-orange: #F39C12;     
+            --brand-cream: #FDF5E6;      
+            
+            --text-primary: #2A1108;     
+            --text-secondary: #5C3A21;   
+            
+            /* Warm Liquid Glass Specs */
+            --glass-blur: blur(25px);
+            --glass-bg: linear-gradient(135deg, rgba(253, 245, 230, 0.85) 0%, rgba(243, 156, 18, 0.2) 100%);
+            --glass-border: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(243, 156, 18, 0.4) 100%);
+            --glass-shadow: 0 12px 30px rgba(42, 17, 8, 0.25);
+            
+            /* Liquid Motion */
+            --transition-smooth: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-main);
+            color: var(--text-primary);
+            background-color: #1A0A05;
+            min-height: 100vh;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .ambient-background {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background-image: url('https://images.unsplash.com/photo-1497935586351-b67a49e012bf?q=80&w=2500&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            z-index: -2;
+            transform: scale(1.05);
+            filter: brightness(0.6) contrast(1.2);
+        }
+
+        /* =========================================
+           2. LIQUID GLASS MATERIAL COMPONENT
+           ========================================= */
+        .liquid-glass {
+            position: relative;
+            background: var(--glass-bg) padding-box, var(--glass-border) border-box;
+            border: 1px solid transparent;
+            border-radius: 20px;
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            box-shadow: var(--glass-shadow);
+            overflow: hidden;
+            transform: translateZ(0);
+        }
+
+        .liquid-glass::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            opacity: 0.04; 
+            pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* =========================================
+           3. BRANDING & HEADER
+           ========================================= */
+        .brand-header {
+            text-align: center;
+            margin-bottom: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .brand-logo {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+            border: 3px solid rgba(255, 255, 255, 0.4);
+            margin-bottom: 20px;
+            background-color: var(--brand-cream);
+        }
+
+        .location-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 24px;
+            background: linear-gradient(135deg, rgba(253, 245, 230, 0.9) 0%, rgba(243, 156, 18, 0.3) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 50px;
+            color: var(--brand-brown);
+            font-family: var(--font-main);
+            font-weight: 700;
+            font-size: 1rem;
+            text-decoration: none;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            box-shadow: 0 4px 15px rgba(42, 17, 8, 0.2);
+            transition: all var(--transition-smooth);
+        }
+
+        .location-btn:hover {
+            background: linear-gradient(135deg, rgba(243, 156, 18, 0.4) 0%, rgba(253, 245, 230, 0.95) 100%);
+            box-shadow: 0 6px 20px rgba(42, 17, 8, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .location-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--brand-orange);
+        }
+
+        /* =========================================
+           4. ARCHITECTURE & NAVIGATION
+           ========================================= */
+        .nav-container {
+            position: fixed;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            padding: 8px;
+            border-radius: 24px;
+            overflow-x: auto;
+            scrollbar-width: none; /* Firefox */
+        }
+        
+        .nav-container::-webkit-scrollbar {
+            display: none; /* Chrome/Safari */
+        }
+
+        @media (min-width: 769px) {
+            .nav-container {
+                top: 32px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: auto;
+                max-width: 90vw;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                top: 24px;
+                left: 16px;
+                right: 16px;
+                padding: 10px;
+            }
+        }
+
+        .nav-item {
+            position: relative;
+            z-index: 2;
+            padding: 10px 20px;
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: color var(--transition-smooth);
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .nav-item.active {
+            color: var(--brand-brown);
+        }
+
+        .nav-slider {
+            position: absolute;
+            top: 8px;
+            bottom: 8px;
+            right: 0; /* Changed to right for RTL */
+            background: rgba(243, 156, 18, 0.35);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(243, 156, 18, 0.15);
+            transition: all var(--transition-smooth);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* =========================================
+           5. CONTENT & EXPERIENCE
+           ========================================= */
+        main {
+            padding: 100px 24px 120px;
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        .menu-section {
+            padding: 30px;
+            margin-bottom: 50px;
+        }
+
+        .section-title {
+            font-weight: 900;
+            font-size: 2.2rem;
+            color: var(--brand-brown);
+            margin-bottom: 24px;
+            text-align: center;
+            border-bottom: 2px solid rgba(243, 156, 18, 0.3);
+            padding-bottom: 10px;
+        }
+
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
+            border-bottom: 1px dashed rgba(56, 26, 15, 0.2);
+        }
+
+        .menu-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .item-info h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        /* Pricing Display Styles */
+        .item-pricing {
+            display: flex;
+            gap: 15px;
+            text-align: center;
+        }
+
+        .price-col {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .price-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+            margin-bottom: 4px;
+            background: rgba(255,255,255,0.5);
+            padding: 2px 8px;
+            border-radius: 10px;
+        }
+
+        .price-val {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--brand-orange);
+            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="ambient-background"></div>
+
+    <nav class="liquid-glass nav-container" aria-label="Main Navigation">
+        <div class="nav-slider" id="navSlider"></div>
+        <div id="nav-links-container" style="display: flex; align-items: center;"></div>
+    </nav>
+
+    <main>
+        <header class="brand-header">
+            <img src="logo.png" alt="Logo" class="brand-logo">
+            <a href="https://maps.app.goo.gl/agfCZ2Pv1UVonDHF7?g_st=ic" target="_blank" rel="noopener noreferrer" class="location-btn">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/></svg>
+                موقعنا على الخريطة
+            </a>
+        </header>
+
+        <div id="menu-content"></div>
+    </main>
+
+    <script>
+        /* =========================================
+           MENU DATA (Extracted from Images)
+           ========================================= */
+        const menuData = [
+            {
+                id: 'coffee',
+                title: 'قهوة',
+                items: [
+                    { name: 'قهوة بابا', small: '2000', large: '3500' },
+                    { name: 'قهوة جكليتية', small: '2000', large: '3500' },
+                    { name: 'قهوة عربية مرة', small: '1500', large: '2000' },
+                    { name: 'قهوة عربية بالعسل', small: '1500', large: '2000' },
+                    { name: 'قهوة تركية (سادة - وسط - حلو)', small: '1500', large: '2000' },
+                    { name: 'قهوة تركية بالبندق', small: '2000', large: '3000' },
+                    { name: 'قهوة تركية بالفستق', small: '2000', large: '3000' },
+                    { name: 'قهوة تركية بالقزوان', small: '2000', large: '3000' },
+                    { name: 'قهوة تركية بالجوز', small: '2000', large: '3000' },
+                    { name: 'قهوة تركية بالجوز والعسل', small: '2000', large: '3000' }
+                ]
+            },
+            {
+                id: 'cold-drinks',
+                title: 'مشروبات باردة',
+                items: [
+                    { name: 'ايس بابا', small: '3000', large: '4500' },
+                    { name: 'ايس جكليت', small: '3000', large: '4500' },
+                    { name: 'ايس لوتس', small: '3000', large: '4000' },
+                    { name: 'ايس اوريو', small: '3000', large: '4500' },
+                    { name: 'ايس كابتشينو', small: '2500', large: '3500' },
+                    { name: 'ايس بندق', small: '2500', large: '3500' },
+                    { name: 'ايس فستق حلبي', small: '2500', large: '3500' },
+                    { name: 'ايس جوز', small: '2500', large: '3500' },
+                    { name: 'ايس بالجوز والعسل', small: '3000', large: '4000' }
+                ]
+            },
+            {
+                id: 'hot-drinks',
+                title: 'مشروبات ساخنة',
+                items: [
+                    { name: 'هوت لوتس', price: '2500' },
+                    { name: 'هوت اوريو', price: '2500' },
+                    { name: 'كابتشينو', price: '1500' },
+                    { name: 'نسكافيه', price: '1500' },
+                    { name: 'حليب', price: '1000' },
+                    { name: 'حليب بالعسل', price: '1500' },
+                    { name: 'جاي', price: '500' },
+                    { name: 'حامض', price: '500' }
+                ]
+            },
+             {
+                id: 'juices',
+                title: 'عصائر طبيعية',
+                items: [
+                    { name: 'عصير بابا ', price: '3000' },
+                    { name: 'موز نوتيلا', price: '3000' },
+                    { name: 'موز لوتس', price: '3000' },
+                    { name: 'موز أريو', price: '3000' },
+                    { name: 'موز فراولة', price: '2000' },
+                    { name: 'موز ', price: '2000' },
+                    { name: 'بطيخ', price: '2000' },
+                    { name: 'برتقال', price: '2000' },
+                    { name: 'ليمون', price: '2000' },
+                    { name: 'تين', price: '3000' },
+                    { name: 'ليمون نعناع', price: '2000' },
+                    { name: 'برتقال ليمون', price: '2000' },
+                    { name: 'موز مكسرات والعسل', price: '4000' }
+                ]
+            },
+            {
+                id: 'mojito',
+                title: 'موهيتو',
+                items: [
+                    { name: 'خلطة بابا', price: '2000' },
+                    { name: 'خلطة 13', price: '2000' },
+                    { name: 'خلطة 14', price: '2000' },
+                    { name: 'بلو كوراساو', price: '2000' },
+                    { name: 'بلوبيري', price: '2000' },
+                    { name: 'فراولة', price: '2000' },
+                    { name: 'ليمون نعناع', price: '2000' },
+                    { name: 'توت احمر بري', price: '2000' },
+                    { name: 'كيوي', price: '2000' },
+                    { name: 'كرز', price: '2000' },
+                    { name: 'عنب', price: '2000' },
+                    { name: 'رمان', price: '2000' },
+                    { name: 'اناناس', price: '2000' },
+                    { name: 'خوخ', price: '2000' },
+                    { name: 'تفاح اخضر', price: '2000' },
+                    { name: 'برتقال', price: '2000' },
+                    { name: 'مانكو', price: '2000' },
+                    { name: 'ركي', price: '2000' },
+                    { name: 'علكة', price: '2000' },
+                    { name: 'توت مشكل', price: '2000' },
+                    { name: 'توت راز بيري', price: '2000' },
+                    { name: 'زنجبيل', price: '2000' }
+                ]
+            },
+            {
+                id: 'mexican',
+                title: 'مكسيكي',
+                items: [
+                    { name: 'خلطة بابا', price: '2500' },
+                    { name: 'خلطة 13', price: '2500' },
+                    { name: 'خلطة 14', price: '2500' },
+                    { name: 'ليمون', price: '2500' },
+                    { name: 'ليمون نعناع', price: '2500' },
+                    { name: 'بلو كوراساو', price: '2500' },
+                    { name: 'بلوبيري', price: '2500' },
+                    { name: 'فراولة', price: '2500' },
+                    { name: 'توت احمر بري', price: '2500' },
+                    { name: 'كيوي', price: '2500' },
+                    { name: 'كرز', price: '2500' },
+                    { name: 'عنب', price: '2500' },
+                    { name: 'رمان', price: '2500' },
+                    { name: 'اناناس', price: '2500' },
+                    { name: 'خوخ', price: '2500' },
+                    { name: 'تفاح اخضر', price: '2500' },
+                    { name: 'برتقال', price: '2500' },
+                    { name: 'مانكو', price: '2500' },
+                    { name: 'ركي', price: '2500' },
+                    { name: 'علكة', price: '2500' },
+                    { name: 'توت مشكل', price: '2500' },
+                    { name: 'توت راز بيري', price: '2500' },
+                    { name: 'زنجبيل', price: '2500' }
+                ]
+            },
+            {
+                id: 'softDrinks',
+                title: 'مشروبات غازية ',
+                items: [
+                     { name: 'بيبسي ', price: '500' },
+                     { name: 'سفن ', price: '500' },
+                     { name: 'ديو ', price: '500' },
+                     { name: 'تايكر  ', price: '1000' },
+                     { name: 'بيبسي +ثلج', price: '1000' },
+                     { name: 'سفن +ثلج', price: '1000' },
+                     { name: 'ديو +ثلج', price: '1000' },
+                     { name: 'تايكر +ثلج ', price: '1500' },
+
+                   
+                ]
+            },
+            {
+                id: 'crepes',
+                title: 'كريب',
+                items: [
+                    { name: 'كريب بابا', price: '5000' },
+                    { name: 'كريب كلاسك', price: '3000' },
+                    { name: 'كريب فواكة', price: '4000' },
+                    { name: 'كريب لوتس', price: '4000' },
+                    { name: 'كريب اوريو', price: '4000' },
+                    { name: 'كريب بستاشيو ', price: '4000' },
+                    { name: 'كريب روله فواكة', price: '4000' }
+                ]
+            },
+            {
+                id: 'waffles',
+                title: 'وافل ',
+                items: [
+                     { name: 'وافل بابا', price: '5000' },
+                    { name: 'وافل كلاسك', price: '3000' },
+                    { name: 'وافل فواكة', price: '4000' },
+                    { name: 'وافل لوتس', price: '4000' },
+                    { name: 'وافل اوريو', price: '4000' },
+                    { name: 'وافل بستاشيو', price: '4000' }
+                   
+                ]
+            },
+                        {
+                id: 'bancake',
+                title: 'بان كيك ',
+                items: [
+                    { name: 'بان كيك بابا', price: '5000' },
+                    { name: 'بان كيك كلاسك', price: '3000' },
+                    { name: 'بان كيك فواكة', price: '4000' },
+                    { name: 'بان كيك لوتس', price: '4000' },
+                    { name: 'بان كيك اوريو', price: '4000' },
+                    { name: 'بان كيك بستاشيو', price: '4000' }
+                    
+                ]
+            },
+             {
+                id: 'travel',
+                title: 'ترايفل ',
+                items: [
+                    { name: 'ترايفل سادة', price: '1500' },
+                    { name: 'ترايفل بالفستق', price: '2000' },
+                    { name: 'ترايفل بالجوز', price: '2000'}  
+                ]
+            },
+             {
+                id: 'jerzat',
+                title: 'جرزات ',
+                items: [
+                    { name: 'جرزات صغير', price: '2500' },
+                    { name: 'جرزات كبير', price: '5000'}  
+                ]
+            },
+             {
+                id: 'shisha',
+                title: 'اراكيل',
+                items: [
+                    { name: 'بابا', price: '5000' },
+                    { name: 'انكليزي', price: '5000' },
+                    { name: 'علج بطيخ', price: '5000' },
+                    { name: 'علج نعناع', price: '5000' },
+                    { name: 'تفاحتين', price: '5000' },
+                    { name: 'ليمون نعناع', price: '5000' },
+                    { name: 'سندي', price: '5000' },
+                    { name: 'امزون', price: '6000' },
+                    { name: 'سندي طبيعي ', price: '10000' },
+                    { name: 'اناناس طبيعي', price: '12000' }
+                ]
+            }
+        ];
+
+        /* =========================================
+           RENDER ENGINE
+           ========================================= */
+        document.addEventListener('DOMContentLoaded', () => {
+            const navContainer = document.getElementById('nav-links-container');
+            const menuContainer = document.getElementById('menu-content');
+
+            // Build DOM
+            menuData.forEach((category, index) => {
+                // 1. Build Navigation Link
+                const navLink = document.createElement('a');
+                navLink.href = `#${category.id}`;
+                navLink.className = `nav-item ${index === 0 ? 'active' : ''}`;
+                navLink.textContent = category.title;
+                navContainer.appendChild(navLink);
+
+                // 2. Build Menu Section
+                const section = document.createElement('section');
+                section.className = 'liquid-glass menu-section';
+                section.id = category.id;
+                
+                let sectionHTML = `<h2 class="section-title">${category.title}</h2>`;
+                
+                category.items.forEach(item => {
+                    sectionHTML += `<article class="menu-item">
+                        <div class="item-info">
+                            <h3>${item.name}</h3>
+                        </div>
+                        <div class="item-pricing">`;
+                    
+                    if (item.small && item.large) {
+                        sectionHTML += `
+                            <div class="price-col">
+                                <span class="price-label">صغير</span>
+                                <span class="price-val">${item.small}</span>
+                            </div>
+                            <div class="price-col">
+                                <span class="price-label">كبير</span>
+                                <span class="price-val">${item.large}</span>
+                            </div>`;
+                    } else if (item.price) {
+                        sectionHTML += `
+                            <div class="price-col">
+                                <span class="price-val">${item.price}</span>
+                            </div>`;
+                    }
+
+                    sectionHTML += `</div></article>`;
+                });
+
+                section.innerHTML = sectionHTML;
+                menuContainer.appendChild(section);
+            });
+
+            // Re-initialize Slider Logic (Adapted for RTL)
+            const navItems = document.querySelectorAll('.nav-item');
+            const slider = document.getElementById('navSlider');
+
+            const updateSlider = (activeItem) => {
+                const itemRect = activeItem.getBoundingClientRect();
+                const navRect = activeItem.parentElement.getBoundingClientRect();
+                
+                // Calculate right position for RTL
+                const rightPos = navRect.right - itemRect.right;
+                
+                slider.style.width = `${itemRect.width}px`;
+                slider.style.transform = `translateX(${-rightPos}px)`; // Negative for RTL transform
+            };
+
+            const initialActive = document.querySelector('.nav-item.active');
+            if(initialActive) {
+                setTimeout(() => updateSlider(initialActive), 50); 
+            }
+
+            navItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault(); 
+                    
+                    navItems.forEach(nav => nav.classList.remove('active'));
+                    this.classList.add('active');
+                    updateSlider(this);
+
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetSection = document.getElementById(targetId);
+                    if(targetSection) {
+                        // Offset for fixed header
+                        const yOffset = -100; 
+                        const y = targetSection.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                        window.scrollTo({top: y, behavior: 'smooth'});
+                    }
+                });
+            });
+
+            window.addEventListener('resize', () => {
+                const currentActive = document.querySelector('.nav-item.active');
+                if(currentActive) updateSlider(currentActive);
+            });
+        });
+    </script>
+<script src="assets/js/item-links.js"></script>
+</body>
+</html>
